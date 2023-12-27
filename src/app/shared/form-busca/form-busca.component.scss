@@ -7,6 +7,10 @@
         align-items: center;
         gap: 12px;
         margin: 16px 0;
+
+        .drop-container {
+            max-width: 230px;
+        }
     }
 
     .input-container {
