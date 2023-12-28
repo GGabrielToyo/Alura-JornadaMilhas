@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 import { CadastroService } from 'src/app/core/servicos/cadastro.service';
 import { FormularioService } from 'src/app/core/servicos/formulario.service';
 import { PessoaUsuaria } from 'src/app/core/types/type';
@@ -9,11 +10,11 @@ import { PessoaUsuaria } from 'src/app/core/types/type';
   styleUrls: ['./cadastro.component.scss']
 })
 export class CadastroComponent {
-  perfilComponent = false;
 
   constructor(
     private formularioService: FormularioService,
-    private cadastroService: CadastroService
+    private cadastroService: CadastroService,
+    private router: Router
   ){}
   
   cadastrar() {
@@ -22,7 +23,7 @@ export class CadastroComponent {
       const novoUsuario: PessoaUsuaria = formCadastro.getRawValue() as PessoaUsuaria;
       this.cadastroService.cadastrar(novoUsuario).subscribe({
         next: (resp) => {
-          console.log(resp);
+          this.router.navigateByUrl('/login');
         },
         error: (err) => {
           console.log(err);

@@ -26,7 +26,7 @@ import { MatNativeDateModule } from '@angular/material/core';
 import { ModalComponent } from './shared/modal/modal.component';
 import { MatDialogModule } from '@angular/material/dialog';
 import { BotaoControleComponent } from './shared/botao-controle/botao-controle.component';
-import { HttpClientModule } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { DropdownUfComponent } from './shared/dropdown-uf/dropdown-uf.component';
@@ -37,6 +37,8 @@ import { MatDividerModule } from '@angular/material/divider';
 import { MatRadioModule } from '@angular/material/radio';
 import {MatCheckboxModule} from '@angular/material/checkbox';
 import { CadastroComponent } from './pages/cadastro/cadastro.component';
+import { PerfilComponent } from './pages/perfil/perfil.component';
+import { AutenticacaoInterceptor } from './core/interceptors/autenticacao.interceptor';
 
 
 
@@ -60,7 +62,8 @@ import { CadastroComponent } from './pages/cadastro/cadastro.component';
     SeletorPassageiroComponent,
     LoginComponent,
     FormBaseComponent,
-    CadastroComponent
+    CadastroComponent,
+    PerfilComponent
   ],
   imports: [
     BrowserModule,
@@ -84,7 +87,11 @@ import { CadastroComponent } from './pages/cadastro/cadastro.component';
     MatRadioModule,
     MatCheckboxModule
   ],
-  providers: [],
+  providers: [{
+    provide: HTTP_INTERCEPTORS,
+    useClass: AutenticacaoInterceptor,
+    multi: true
+  }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

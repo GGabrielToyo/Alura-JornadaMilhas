@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AutenticacaoService } from 'src/app/core/servicos/autenticacao.service';
+import { TokenService } from 'src/app/core/servicos/token.service';
 
 @Component({
   selector: 'app-login',
@@ -30,8 +31,8 @@ export class LoginComponent implements OnInit {
 
     this.loginService.autenticar(email, senha).subscribe({
       next: (value) => {
-        console.log(value);
         this.router.navigateByUrl('/');
+        this.loginForm.reset();
       },
       error: (err) => {
         console.log("Erro no login", err);

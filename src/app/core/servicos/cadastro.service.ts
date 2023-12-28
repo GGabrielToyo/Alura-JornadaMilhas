@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { evironment } from 'src/environments/environment.development';
@@ -12,7 +12,16 @@ export class CadastroService {
 
   constructor(private http: HttpClient) { }
 
-  cadastrar(usuario: PessoaUsuaria):Observable<PessoaUsuaria> {
+  cadastrar(usuario: PessoaUsuaria): Observable<PessoaUsuaria> {
     return this.http.post<PessoaUsuaria>(`${this.apiUrl}/auth/cadastro`, usuario);
   }
+
+  buscarUsuario(): Observable<PessoaUsuaria> {  
+    return this.http.get<PessoaUsuaria>(`${this.apiUrl}/auth/perfil`);
+  }
+
+  editarUsuario(usuario: PessoaUsuaria): Observable<PessoaUsuaria> {
+    return this.http.patch<PessoaUsuaria>(`${this.apiUrl}/auth/perfil`, usuario);
+  }
+
 }

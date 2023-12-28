@@ -12,8 +12,13 @@ import { FormValidations } from '../form-validations';
 export class FormBaseComponent implements OnInit {
   cadastroForm!: FormGroup;
   estadoControl = new FormControl<UnidadeFederativa | null>(null, Validators.required);
-  @Input() perfilComponent!: boolean;
+
+  @Input() perfilComponent: boolean = false;
   @Output() acaoClique: EventEmitter<any> = new EventEmitter<any>();
+  @Output() deslogarUsuario: EventEmitter<any> = new EventEmitter<any>();
+  @Input() titulo: string = 'Crie sua Conta';
+  @Input() textoBotao: string = 'CADASTRAR';
+
 
   constructor(
     private formBuilder: FormBuilder,
@@ -36,11 +41,23 @@ export class FormBaseComponent implements OnInit {
       aceitarTermos: [null, [Validators.requiredTrue]]
     });
 
+    if(this.perfilComponent) {
+      this.cadastroForm.get('aceitarTermos')?.setValidators(null);
+    } else {
+      this.cadastroForm.get('aceitarTermos')?.setValidators([Validators.requiredTrue]);
+    }
+
+    this.cadastroForm.get('aceitarTermos')?.updateValueAndValidity();
+
     this.formularioService.setCadastro(this.cadastroForm);
   }
 
   executarAcao(){
     this.acaoClique.emit();
+  }
+
+  deslogar(){
+    this.deslogarUsuario.emit();
   }
 
 }

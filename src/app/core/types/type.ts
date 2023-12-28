@@ -26,5 +26,6 @@ export interface PessoaUsuaria {
     email: string,
     senha: string,
     cidade: string,
-    estado: UnidadeFederativa
+    estado: UnidadeFederativa,
+    genero: string
 }
