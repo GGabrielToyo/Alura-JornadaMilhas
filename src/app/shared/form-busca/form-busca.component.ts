@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Output } from '@angular/core';
 import { FormBuscaService } from 'src/app/core/servicos/form-busca.service';
 
 @Component({
@@ -7,10 +7,17 @@ import { FormBuscaService } from 'src/app/core/servicos/form-busca.service';
   styleUrls: ['./form-busca.component.scss']
 })
 export class FormBuscaComponent {
-  constructor(public formBuscaService: FormBuscaService){}
+  @Output() realizarBusca = new EventEmitter;
+
+  constructor(public formBuscaService: FormBuscaService) { }
 
   buscar(): void {
-    console.log(this.formBuscaService.formBusca.value);
+    if (this.formBuscaService.formEstaValido) {
+      const formBuscaValue = this.formBuscaService.obterDadosBusca();
+      this.realizarBusca.emit(formBuscaValue);
+    } else {
+      alert('O formulário precisa ser preenchido!');
+    }
   }
 
 }

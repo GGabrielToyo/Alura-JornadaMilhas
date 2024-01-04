@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { DepoimentoService } from 'src/app/core/servicos/depoimento.service';
 import { PromocaoService } from 'src/app/core/servicos/promocao.service';
 import { Depoimento, Promocao } from 'src/app/core/types/type';
@@ -9,8 +10,11 @@ import { Depoimento, Promocao } from 'src/app/core/types/type';
   styleUrls: ['./home.component.scss']
 })
 export class HomeComponent implements OnInit {
-  constructor(private servicePromocoes: PromocaoService,
-      private serviceDepoimento: DepoimentoService){}
+  constructor(
+    private servicePromocoes: PromocaoService,
+    private serviceDepoimento: DepoimentoService,
+    private router: Router
+    ){}
 
   promocoes?: Promocao[] = [];
   depoimentos?: Depoimento[] = [];
@@ -22,7 +26,10 @@ export class HomeComponent implements OnInit {
 
     this.serviceDepoimento.listar().subscribe(resp => {
       this.depoimentos = resp;
-    })
+    });
+  }
 
+  navegarParaBusca():void {
+    this.router.navigateByUrl('/busca');
   }
 }
