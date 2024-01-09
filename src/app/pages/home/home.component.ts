@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { DepoimentoService } from 'src/app/core/servicos/depoimento.service';
-import { PromocaoService } from 'src/app/core/servicos/promocao.service';
+import { DepoimentoService } from 'src/app/core/services/depoimento.service';
+import { PromocaoService } from 'src/app/core/services/promocao.service';
 import { Depoimento, Promocao } from 'src/app/core/types/type';
 
 @Component({

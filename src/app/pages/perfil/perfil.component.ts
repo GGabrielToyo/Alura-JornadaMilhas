@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
-import { CadastroService } from 'src/app/core/servicos/cadastro.service';
-import { FormularioService } from 'src/app/core/servicos/formulario.service';
-import { TokenService } from 'src/app/core/servicos/token.service';
-import { UserService } from 'src/app/core/servicos/user.service';
+import { CadastroService } from 'src/app/core/services/cadastro.service';
+import { FormularioService } from 'src/app/core/services/formulario.service';
+import { TokenService } from 'src/app/core/services/token.service';
+import { UserService } from 'src/app/core/services/user.service';
 import { PessoaUsuaria } from 'src/app/core/types/type';
 
 @Component({

@@ -1,5 +1,6 @@
 import { Component, EventEmitter, Output } from '@angular/core';
-import { FormBuscaService } from 'src/app/core/servicos/form-busca.service';
+import { FormBuscaService } from 'src/app/core/services/form-busca.service';
+import { PassagensService } from 'src/app/core/services/passagens.service';
 
 @Component({
   selector: 'app-filtros-complementares',
@@ -8,14 +9,15 @@ import { FormBuscaService } from 'src/app/core/servicos/form-busca.service';
 })
 export class FiltrosComplementaresComponent {
 
-  @Output() realizarbusca  = new EventEmitter();
+  @Output() realizarbusca = new EventEmitter();
 
   constructor(
-    private formBuscaService: FormBuscaService
-  ){}
+    public formBuscaService: FormBuscaService,
+    private passagemService: PassagensService
+  ) { }
 
-  busca(){
-    if(this.formBuscaService.formEstaValido) {
+  busca() {
+    if (this.formBuscaService.formEstaValido) {
       this.formBuscaService.formBusca.markAllAsTouched();
       window.scroll({
         top: 0,
@@ -25,6 +27,15 @@ export class FiltrosComplementaresComponent {
       return
     }
     this.realizarbusca.emit(this.formBuscaService.obterDadosBusca());
+  }
+
+  limparFiltros() {
+    this.formBuscaService.formBusca.patchValue({
+      conexoes: null,
+      companhias: null,
+      precoMin: this.passagemService.precoMin,
+      precoMax: this.passagemService.precoMax,
+    });
   }
 
 }

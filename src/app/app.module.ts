@@ -47,6 +47,7 @@ import { LabelComponent } from './shared/form-busca/filtros-complementares/label
 import { ParadasComponent } from './shared/form-busca/filtros-complementares/paradas/paradas.component';
 import { PrecosComponent } from './shared/form-busca/filtros-complementares/precos/precos.component';
 import { MatSliderModule } from '@angular/material/slider';
+import { DestaquesComponent } from './shared/destaques/destaques.component';
 
 
 
@@ -78,7 +79,8 @@ import { MatSliderModule } from '@angular/material/slider';
     CompanhiasComponent,
     LabelComponent,
     ParadasComponent,
-    PrecosComponent
+    PrecosComponent,
+    DestaquesComponent
   ],
   imports: [
     BrowserModule,

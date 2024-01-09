@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
-import { FormBuscaService } from 'src/app/core/servicos/form-busca.service';
+import { FormBuscaService } from 'src/app/core/services/form-busca.service';
 import { OpcoesDeParada } from 'src/app/core/types/type';
 
 @Component({
@@ -19,7 +19,7 @@ export class ParadasComponent implements OnInit {
 
   ngOnInit(): void {
     this.conexoesControl.valueChanges.subscribe(value => {
-      if (!value) {
+      if (value === null) {
         this.opcoesSelecionadas = null;
       }
     });

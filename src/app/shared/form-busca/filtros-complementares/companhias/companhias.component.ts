@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
-import { FormBuscaService } from 'src/app/core/servicos/form-busca.service';
+import { CompanhiaService } from 'src/app/core/services/companhia.service';
+import { FormBuscaService } from 'src/app/core/services/form-busca.service';
 import { Companhia } from 'src/app/core/types/type';
 
 @Component({
@@ -15,12 +16,16 @@ export class CompanhiasComponent implements OnInit {
   companhiasControl: FormControl<number[] | null>
 
   constructor(
-    private formBuscaService: FormBuscaService
+    private formBuscaService: FormBuscaService,
+    private companhiaService: CompanhiaService
   ) {
     this.companhiasControl = this.formBuscaService.obterControle<number[] | null>('companhias');
   }
 
   ngOnInit(): void {
+    this.companhiaService.listar().subscribe( res => {
+      this.companhias = res;
+    });
 
     this.companhiasControl.valueChanges.subscribe(value => {
       if (!value) {
